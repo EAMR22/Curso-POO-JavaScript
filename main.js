@@ -71,3 +71,43 @@ const miguelito = new Student2({
     age: 28,
     cursosAprobados: [],
 });
+
+// Clase de ventajas de poo
+
+class Estudiante {
+    constructor({
+        name,
+        email,
+        username,
+        twitter = undefined,
+        instagram = undefined,
+        facebook = undefined,
+        approvedCourses = [],
+        learningPaths = [],
+    }){
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.socialMedia = {
+            twitter,
+            instagram,
+            facebook,
+        }
+        this.approvedCourses = approvedCourses;
+        this.learningPaths = learningPaths;
+    }
+}
+
+const elvis2 = new Estudiante({
+    name: "elvis",
+    username: "elvishn",
+    email: "elvis@platzi.com",
+    facebook: "Elvis Molina",
+});
+
+const miguel = new Estudiante({
+    name: "miguel",
+    username: "miguelhn",
+    email: "miguel@platzi.com",
+    instagram: "miguel30",
+});
