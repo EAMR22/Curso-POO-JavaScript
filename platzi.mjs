@@ -1,10 +1,44 @@
+function videoPlay(id) {
+    const urlSecreta = "https://platzi.com" + id;
+}
+
+function videoStop(id) {
+    const urlSecreta = "https://platzi.com" + id;
+}
+
+export class PlatziClass {
+    constructor({
+        name,
+        videoID,
+    }) {
+        this.name = name;
+        this.videoID = videoID;
+    }
+
+    reproducir() {
+        videoPlay(this.videoID);
+    }
+
+    pausar() {
+        videoStop(this.videoID);
+    }
+}
+
 class Course {
     constructor({
         name,
         classes,
     }){
-        this.name = name;
+        this._name = name;
         this.classes = classes;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(nuevoNombrecito) {
+        this._name = nuevoNombrecito;
     }
 }
 
@@ -48,7 +82,7 @@ const escuelaVideojuegos = new LearningPath({
     ],
 });
 
-const escuelaWeb = new LearningPath({
+const escuelaSoftware = new LearningPath({
     name: "Escuela de Desarrollo de software",
     courses: [
         cursoProgBasica,
