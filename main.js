@@ -35,8 +35,8 @@ Student.prototype.aprobarCurso = function (nuevoCursito){
 
 // Crear instacias del objeto
 
-const juanita = new Student(
-    "Juanita Alejandra",
+const gabriela = new Student(
+    "Gabriela Alejandra",
     15,
     [
         "Curso de introducción a la producción de videojuegos",
@@ -65,9 +65,9 @@ class Student2 {
     }
 };
 
-const miguelito = new Student2({
-    email: "miguelito@platzi.com",
-    name: "Miguelito",
+const carlos = new Student2({
+    email: "carlos@platzi.com",
+    name: "Carlos",
     age: 28,
     cursosAprobados: [],
 });

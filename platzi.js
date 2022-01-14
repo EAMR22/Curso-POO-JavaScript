@@ -6,7 +6,7 @@ function videoStop(id) {
     const urlSecreta = "https://platzi.com" + id;
 }
 
-export class PlatziClass {
+class PlatziClass {
     constructor({
         name,
         videoID,
@@ -27,10 +27,14 @@ export class PlatziClass {
 class Course {
     constructor({
         name,
-        classes,
+        classes = [],
+        isFree = false,
+        lang = "spanish",
     }){
         this._name = name;
         this.classes = classes;
+        this.isFree = isFree;
+        this.lang = lang;
     }
 
     get name() {
@@ -44,6 +48,7 @@ class Course {
 
 const cursoProgBasica = new Course({
     name: "Curso gratis de programacion basica",
+    isFree: true,
 });
 
 const cursoDefinitivoHTML = new Course({
@@ -52,6 +57,7 @@ const cursoDefinitivoHTML = new Course({
 
 const cursoPracticoHTML = new Course({
     name: "Curso Practico de HTML y CSS",
+    lang: "english",
 });
 
 class LearningPath {
@@ -115,14 +121,48 @@ class Estudiante {
     }
 }
 
-const elvis2 = new Estudiante({
-    name: "elvis",
-    username: "elvishn",
-    email: "elvis@platzi.com",
-    facebook: "Elvis Molina",
+class FreeEstudiante extends Estudiante{
+    constructor(props) {
+        super(props); // Con super nos permite llamar al constructor de la clase madre Estudiante.
+    }
+
+    approveCourse(newCourse) {
+        if(newCourse.isFree) {
+            this.approvedCourses.push(newCourse);
+        } else {
+            console.warn("Lo sentimos " + this.name + ", solo puedes tomar cursos abiertos");
+        }
+    }
+}
+
+class BasicEstudiante extends Estudiante{
+    constructor(props) {
+        super(props);
+    }
+
+    approveCourse(newCourse) {
+        if(newCourse.lang !== "english") {
+            this.approvedCourses.push(newCourse);
+        } else {
+            console.warn("Lo sentimos " + this.name + ", no puedes tomar cursos en ingles");
+        }
+    }
+}
+
+class ExpertEstudiante extends Estudiante{
+    constructor(props) {
+        super(props);
+    }
+}
+
+const juan = new FreeEstudiante({
+    name: "juan",
+    username: "juanhn",
+    email: "juan@platzi.com",
+    facebook: "Juan Molina",
 });
 
-const miguel = new Estudiante({
+const miguel = new BasicEstudiante({
     name: "miguel",
     username: "miguelhn",
     email: "miguel@platzi.com",
