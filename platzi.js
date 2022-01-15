@@ -1,3 +1,22 @@
+class Comment {
+    constructor({
+        content,
+        studentName,
+        studentRole = "estudiante",
+    }) {
+        this.content = content;
+        this.studentName = studentName;
+        this.studentRole = studentRole;
+        this.likes = 0;
+    }
+
+    publicar() {
+        console.log(this.studentName + " (" + this.studentRole + ")");
+        console.log(this.likes + " likes");
+        console.log(this.content);
+    }
+}
+
 function videoPlay(id) {
     const urlSecreta = "https://platzi.com" + id;
 }
@@ -119,6 +138,14 @@ class Estudiante {
         this.approvedCourses = approvedCourses;
         this.learningPaths = learningPaths;
     }
+
+    publicarComentario(commentContent) { // Aplicamos polimorfismo que viene de la clase Comment.
+        const comment = new Comment({
+            content: commentContent,
+            studentName: this.name,
+        });
+        comment.publicar();
+    }
 }
 
 class FreeEstudiante extends Estudiante{
@@ -132,6 +159,14 @@ class FreeEstudiante extends Estudiante{
         } else {
             console.warn("Lo sentimos " + this.name + ", solo puedes tomar cursos abiertos");
         }
+    }
+
+    publicarComentario(commentContent) {
+        const comment = new Comment({
+            content: commentContent,
+            studentName: this.name,
+        });
+        comment.publicar();
     }
 }
 
@@ -155,6 +190,25 @@ class ExpertEstudiante extends Estudiante{
     }
 }
 
+class TeacherEstudiante extends Estudiante{
+    constructor(props) {
+        super(props);
+    }
+
+    approvedCourse(newCourse) {
+        this.approvedCourses.push(newCourse);
+    }
+
+    publicarComentario(commentContent) {
+        const comment = new Comment({
+            content: commentContent,
+            studentName: this.name,
+            studentRole: "profesor",
+        });
+        comment.publicar();
+    }
+}
+
 const juan = new FreeEstudiante({
     name: "juan",
     username: "juanhn",
@@ -167,4 +221,15 @@ const miguel = new BasicEstudiante({
     username: "miguelhn",
     email: "miguel@platzi.com",
     instagram: "miguel30",
+    learningPaths: [
+        escuelaWeb,
+        escuelaSoftware,
+    ],
+});
+
+const freddy = new TeacherEstudiante({
+    name: "freddy",
+    username: "freddier",
+    email: "f@egp.com",
+    instagram: "freddier",
 });
